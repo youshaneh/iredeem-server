@@ -1,7 +1,5 @@
 package com.shane.iredeem.controller;
 
-import java.util.List;
-
 import com.shane.iredeem.entity.Flight;
 import com.shane.iredeem.repository.FlightRepository;
 
