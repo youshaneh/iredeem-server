@@ -24,7 +24,7 @@ public class ItineraryController {
   ItineraryService itineraryService;
 
   @GetMapping("/routes")
-  public List<List<String>> getRoutes() {
+  public List<List<String>> getRoutes() { 
     return itineraryRepository.findRoutes();
   }
 
@@ -46,5 +46,4 @@ public class ItineraryController {
       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date till) {
     return itineraryService.getAvailability(departure, arrival, since, till);
   }
-
 }

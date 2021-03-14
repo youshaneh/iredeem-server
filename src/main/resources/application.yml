@@ -3,4 +3,3 @@ spring:
     username: test
     password: 1234
     url: jdbc:mysql://localhost:3306/iredeem
-    driver-class-name: com.mysql.cj.jdbc.Driver
