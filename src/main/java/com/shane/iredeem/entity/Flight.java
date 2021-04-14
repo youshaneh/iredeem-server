@@ -57,10 +57,6 @@ public class Flight implements Serializable {
 	@Column(name = "arrival_time")
 	private Date arrivalTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "update_time")
-	private Date updateTime;
-
 	public int getFlightId() {
 		return flightId;
 	}
@@ -172,13 +168,4 @@ public class Flight implements Serializable {
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
 }

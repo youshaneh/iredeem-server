@@ -26,6 +26,10 @@ public class Itinerary implements Serializable {
 	@JoinColumn(name="flight2")
 	private Flight flight2;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "update_time")
+	private Date updateTime;
+
 	public int getItineraryId() {
 		return itineraryId;
 	}
@@ -48,5 +52,13 @@ public class Itinerary implements Serializable {
 
 	public void setFlight2(Flight flight2) {
 		this.flight2 = flight2;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 }
