@@ -2,6 +2,7 @@ package com.shane.iredeem.service;
 
 import java.util.Optional;
 
+import com.shane.iredeem.constant.Availability;
 import com.shane.iredeem.constant.Cabin;
 import com.shane.iredeem.entity.Flight;
 
@@ -18,7 +19,6 @@ class ItineraryServiceTests {
 	@Test
 	void testIsCx() {
 		Assertions.assertTrue(itineraryService.isCx("CX"));
-		Assertions.assertTrue(itineraryService.isCx("KA"));
 		Assertions.assertFalse(itineraryService.isCx("BA"));
 		Assertions.assertFalse(itineraryService.isCx("JA"));
 	}
@@ -26,10 +26,9 @@ class ItineraryServiceTests {
 	@Test
 	void testIsOnWaitingList() {
 		Assertions.assertTrue(itineraryService.isFlightOnWaitingList("CX", "L"));
-		Assertions.assertTrue(itineraryService.isFlightOnWaitingList("KA", "L"));
-		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("KA", "1"));
-		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("KA", "20"));
-		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("KA", "X"));
+		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("CX", "1"));
+		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("CX", "20"));
+		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("CX", "X"));
 		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("BA", "L"));
 		Assertions.assertFalse(itineraryService.isFlightOnWaitingList("BA", "9"));
 	}
@@ -50,19 +49,19 @@ class ItineraryServiceTests {
 		flight1.setStatusF("L");
 		flight1.setStatusB("N");
 		flight1.setStatusN("5");
-		Assertions.assertEquals(Cabin.FIRST, itineraryService.getStatus(flight1, null, Cabin.FIRST, false));
-		Assertions.assertEquals(Cabin.BUSINESS, itineraryService.getStatus(flight1, null, Cabin.BUSINESS, false));
-		Assertions.assertEquals(Cabin.PREMIUM_ECONOMY, itineraryService.getStatus(flight1, null, Cabin.PREMIUM_ECONOMY, false));
+		Assertions.assertEquals(Availability.NON_STOP, itineraryService.getStatus(flight1, null, Cabin.FIRST, true));
+		Assertions.assertEquals(Availability.UNAVAILABLE, itineraryService.getStatus(flight1, null, Cabin.BUSINESS, false));
+		Assertions.assertEquals(Availability.NON_STOP, itineraryService.getStatus(flight1, null, Cabin.PREMIUM_ECONOMY, false));
 		Flight flight2 = new Flight();
 		flight2.setAirline("BA");
 		flight2.setStatusF("1");
 		flight2.setStatusB("2");
 		flight2.setStatusN("L");
-		Assertions.assertEquals(Cabin.FIRST, itineraryService.getStatus(flight2, null, Cabin.FIRST, false));
-		Assertions.assertEquals(Cabin.BUSINESS, itineraryService.getStatus(flight2, null, Cabin.BUSINESS, false));
-		Assertions.assertEquals(Cabin.PREMIUM_ECONOMY, itineraryService.getStatus(flight2, null, Cabin.PREMIUM_ECONOMY, false));
-		Assertions.assertEquals(Cabin.FIRST, itineraryService.getStatus(flight1, flight2, Cabin.FIRST, false));
-		Assertions.assertEquals(Cabin.PREMIUM_ECONOMY, itineraryService.getStatus(flight1, flight2, Cabin.BUSINESS, false));
-		Assertions.assertEquals(Cabin.PREMIUM_ECONOMY, itineraryService.getStatus(flight1, flight2, Cabin.PREMIUM_ECONOMY, false));
+		Assertions.assertEquals(Availability.NON_STOP, itineraryService.getStatus(flight2, null, Cabin.FIRST, false));
+		Assertions.assertEquals(Availability.NON_STOP, itineraryService.getStatus(flight2, null, Cabin.BUSINESS, false));
+		Assertions.assertEquals(Availability.UNAVAILABLE, itineraryService.getStatus(flight2, null, Cabin.PREMIUM_ECONOMY, false));
+		Assertions.assertEquals(Availability.UNAVAILABLE, itineraryService.getStatus(flight1, flight2, Cabin.FIRST, false));
+		Assertions.assertEquals(Availability.UNAVAILABLE, itineraryService.getStatus(flight1, flight2, Cabin.BUSINESS, false));
+		Assertions.assertEquals(Availability.UNAVAILABLE, itineraryService.getStatus(flight1, flight2, Cabin.PREMIUM_ECONOMY, false));
   }
 }

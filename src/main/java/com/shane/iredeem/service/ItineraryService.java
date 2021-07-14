@@ -25,8 +25,12 @@ public class ItineraryService {
         return itineraryRepository.findRoutes();
     }
 
-    public Optional<Itinerary> getItinerary(Integer id) {
+    public Optional<Itinerary> getItinerary(Long id) {
         return itineraryRepository.findById(id);
+    }
+
+    public List<Itinerary> getItineraries(List<Long> ids) {
+        return itineraryRepository.findByItineraryIdIn(ids);
     }
 
     public List<Itinerary> getItineraries(String departure, String arrival, Date since, Date till) {

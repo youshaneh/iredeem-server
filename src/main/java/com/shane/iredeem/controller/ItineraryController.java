@@ -28,7 +28,7 @@ public class ItineraryController {
     }
 
     @GetMapping("/itineraries/{id}")
-    public Itinerary getItinerary(@PathVariable("id") Integer id) {
+    public Itinerary getItinerary(@PathVariable("id") Long id) {
         return itineraryService.getItinerary(id).orElse(null);
     }
 

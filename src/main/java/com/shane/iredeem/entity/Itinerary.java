@@ -16,7 +16,7 @@ public class Itinerary implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	private int itineraryId;
+	private long itineraryId;
 
 	@ManyToOne
 	@JoinColumn(name="flight1")
@@ -30,11 +30,11 @@ public class Itinerary implements Serializable {
 	@Column(name = "update_time")
 	private Date updateTime;
 
-	public int getItineraryId() {
+	public long getItineraryId() {
 		return itineraryId;
 	}
 
-	public void setItineraryId(int itineraryId) {
+	public void setItineraryId(long itineraryId) {
 		this.itineraryId = itineraryId;
 	}
 
